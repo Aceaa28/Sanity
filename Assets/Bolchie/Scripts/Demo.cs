@@ -30,6 +30,9 @@ public class Demo : MonoBehaviour {
 	bool dead = false;
 	bool attack = false;
 
+	float horizontal;
+	float vertical; 
+
 	void Start () {
 		GetComponent<Rigidbody2D> ().freezeRotation = true;
 		rb = GetComponent<Rigidbody2D> ();
@@ -48,7 +51,8 @@ public class Demo : MonoBehaviour {
 		grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
 		anim.SetBool ("Ground", grounded);
 
-		float horizontal = Input.GetAxis("Horizontal");
+		horizontal = Input.GetAxis("Horizontal");
+		 vertical = Input.GetAxis("Vertical");
 		if (!dead && !attack)
 		{
 			anim.SetFloat ("vSpeed", rb.velocity.y);
@@ -80,7 +84,7 @@ public class Demo : MonoBehaviour {
 			anim.SetBool ("Attack", false);
 			}
 
-		if (grounded && Input.GetKeyDown(KeyCode.Space) && !dead)
+		if (grounded && vertical > 0 && !dead)
 		{
 			anim.SetBool ("Ground", false);
 			rb.AddForce (new Vector2 (0,jumpForce));
