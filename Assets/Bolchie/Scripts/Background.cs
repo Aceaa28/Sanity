@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class Background : MonoBehaviour
 {
-    private Renderer renderer;
-    private Vector2 savedOffset;
-    public float scrollSpeed;
+    //private Renderer renderer;
+   // private Vector2 savedOffset;
+    //public float scrollSpeed;
+    public float backgroundSpeed;
+    public Renderer backgroundRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<Renderer> ();
+        backgroundRenderer.material.mainTextureOffset += new Vector2(backgroundSpeed * Time.deltaTime);
+        //renderer = GetComponent<Renderer> ();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float x = Mathf.Repeat (Time.time * scrollSpeed, 1);
-        Vector2 offset = new Vector2 (x, 0);
-        renderer.sharedMaterial.SetTextureOffset("_MainTex", offset);
+        //float x = Mathf.Repeat (Time.time * scrollSpeed, 1);
+        //Vector2 offset = new Vector2 (x, 0);
+        //renderer.sharedMaterial.SetTextureOffset("_MainTex", offset);
     }
 }
