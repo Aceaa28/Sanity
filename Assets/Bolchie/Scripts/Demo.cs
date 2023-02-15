@@ -23,7 +23,7 @@ public class Demo : MonoBehaviour {
 
 	//variable for how high player jumps//
 	[SerializeField]
-	private float jumpForce = 300f;
+	private float jumpForce = 50f;
 
 	public Rigidbody2D rb { get; set; }
 

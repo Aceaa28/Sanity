@@ -13,6 +13,7 @@ public class Platform : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(GeneratePlatform());
         
     }
 
@@ -20,12 +21,12 @@ public class Platform : MonoBehaviour
     void Update()
     {
         playerPosition = player.transform.position;
-        StartCoroutine(GeneratePlatform());
+        //StartCoroutine(GeneratePlatform());
     }
 
     IEnumerator GeneratePlatform ()
     {
-        yield return new WaitForSeconds (15);
+        yield return new WaitForSeconds (5);
         Instantiate (platform, new Vector2 (playerPosition.x + 5, Random.Range(minY, maxY)), Quaternion.identity);
         Debug.Log("works");
 
