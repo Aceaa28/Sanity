@@ -669,10 +669,6 @@ PrefabInstance:
       value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 9204523913075493470, guid: 5f248546285cf451db6737bf2f9428d4, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.68441594
-      objectReference: {fileID: 0}
-    - target: {fileID: 9204523913075493470, guid: 5f248546285cf451db6737bf2f9428d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.29
       objectReference: {fileID: 0}
@@ -1548,7 +1544,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 49677976885761885, guid: 6d689f49362ee4b17a371654056fccb9, type: 3}
       propertyPath: jumpForce
-      value: 5
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 49677976885761885, guid: 6d689f49362ee4b17a371654056fccb9, type: 3}
+      propertyPath: whatIsGround.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 81080586105232365, guid: 6d689f49362ee4b17a371654056fccb9, type: 3}
       propertyPath: m_Name
@@ -1605,6 +1605,10 @@ PrefabInstance:
     - target: {fileID: 87660143974101825, guid: 6d689f49362ee4b17a371654056fccb9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 113207845718775657, guid: 6d689f49362ee4b17a371654056fccb9, type: 3}
+      propertyPath: m_Mass
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 113207845718775657, guid: 6d689f49362ee4b17a371654056fccb9, type: 3}
       propertyPath: m_GravityScale
