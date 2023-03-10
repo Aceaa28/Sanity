@@ -10,7 +10,7 @@ public class Platform : MonoBehaviour
     void Update()
     {
         transform.position += new Vector3(-speed, 0, 0) * Time.deltaTime;
-        if (transform.position.x < -5)
+        if (transform.position.x < -10)
         {
             Destroy(gameObject); 
         }
