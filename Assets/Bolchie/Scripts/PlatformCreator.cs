@@ -5,13 +5,16 @@ using UnityEngine;
 public class PlatformCreator : MonoBehaviour
 {
     [SerializeField] GameObject platformPrefab;
-    [SerializeField] Transform referencePoint;
+    [SerializeField] GameObject[] referencePoint;
     private GameObject lastCreatedPlatform;
+    int randomPlatform;
 
     // Start is called before the first frame update
     void Start()
     {
-       lastCreatedPlatform = Instantiate(platformPrefab, referencePoint.position, Quaternion.identity);
+        randomPlatform = Random.Range(0, referencePoint.Length);
+        Debug.Log(referencePoint.Length);
+       lastCreatedPlatform = Instantiate(platformPrefab, referencePoint[randomPlatform].transform.position, Quaternion.identity);
     }
 
     // Update is called once per frame
@@ -19,7 +22,8 @@ public class PlatformCreator : MonoBehaviour
     {
         if (lastCreatedPlatform.transform.position.x < 0)
         {
-            lastCreatedPlatform = Instantiate(platformPrefab, referencePoint.position, Quaternion.identity);
+            randomPlatform = Random.Range(0, referencePoint.Length);
+            lastCreatedPlatform = Instantiate(platformPrefab, referencePoint[randomPlatform].transform.position, Quaternion.identity);
         }
     }
 }
