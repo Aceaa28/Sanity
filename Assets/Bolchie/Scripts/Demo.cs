@@ -101,6 +101,8 @@ public class Demo : MonoBehaviour {
 					anim.SetBool ("Dead", false);
 					dead = false;
 				}
+
+
 		}
 	}
 		
