@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +12,7 @@ using UnityEngine;
 public class Demo : MonoBehaviour {
 
 	//variable for how fast player runs//
-	private float speed = 5f;
+	private float speed = 10f;
 
 	private bool facingRight = true;
 	private Animator anim;
@@ -31,18 +31,27 @@ public class Demo : MonoBehaviour {
 	bool attack = false;
 
 	float horizontal;
-	float vertical; 
-
+	float vertical;
+	
+	CircleCollider2D circleCol;
+	bool circleColActive = true;
 	void Start () {
 		GetComponent<Rigidbody2D> ().freezeRotation = true;
 		rb = GetComponent<Rigidbody2D> ();
 		anim = GetComponentInChildren<Animator> ();
+		circleCol = GetComponent<CircleCollider2D>();
 
 	}
 
 	void Update()
 	{
 		HandleInput ();
+
+		if (circleColActive == false)
+		{
+			circleCol.isTrigger = true;
+			//circleColActive = true;
+		}
 	}
 
 	//movement//
@@ -101,6 +110,8 @@ public class Demo : MonoBehaviour {
 					anim.SetBool ("Dead", false);
 					dead = false;
 				}
+
+
 		}
 	}
 		
@@ -110,5 +121,14 @@ public class Demo : MonoBehaviour {
 			Vector3 theScale = transform.localScale;
 			theScale.x *= -1;
 			transform.localScale = theScale;
+	}
+
+	private void OnCollisionEnter2D(Collision2D other)
+	{
+		if(other.gameObject.CompareTag("Platform"))
+		{
+			circleColActive = false;
+		}
+
 	}
 }

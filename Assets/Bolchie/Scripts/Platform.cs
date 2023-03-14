@@ -6,9 +6,10 @@ public class Platform : MonoBehaviour
 {
     float maxY = 0;
     float minY = -9;
-    [SerializeField] GameObject platform;
-    [SerializeField] GameObject player; 
+   // [SerializeField] GameObject platform;
+  //  [SerializeField] GameObject player; 
     Vector2 playerPosition; 
+   [SerializeField] float speed = 1;
 
 
     // Start is called before the first frame update
@@ -22,7 +23,13 @@ public class Platform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerPosition = player.transform.position;
+        //playerPosition = player.transform.position;
+
+        transform.position += new Vector3(-speed, 0, 0) * Time.deltaTime;
+        if (transform.position.x < -10)
+        {
+            Destroy(gameObject); 
+        }
       
      
         //StartCoroutine(GeneratePlatform());
@@ -31,8 +38,9 @@ public class Platform : MonoBehaviour
     void GeneratePlatform ()
     {
         
-        Instantiate (platform, new Vector2 (playerPosition.x + 5, Random.Range(minY, maxY)), Quaternion.identity);
-        Debug.Log("works");
+       // Instantiate (platform, new Vector2 (playerPosition.x + 5, Random.Range(minY, maxY)), Quaternion.identity);
+       // Debug.Log("works");
 
+        
     }
 }
