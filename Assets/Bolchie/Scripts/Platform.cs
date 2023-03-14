@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
+<<<<<<< HEAD
     float maxY = 0;
     float minY = -9;
     [SerializeField] GameObject platform;
@@ -18,10 +19,14 @@ public class Platform : MonoBehaviour
         InvokeRepeating("GeneratePlatform", 10.0f, 5.0f);
         
     }
+=======
+   [SerializeField] float speed = 1;
+>>>>>>> development-branch
 
     // Update is called once per frame
     void Update()
     {
+<<<<<<< HEAD
         playerPosition = player.transform.position;
       
      
@@ -34,5 +39,12 @@ public class Platform : MonoBehaviour
         Instantiate (platform, new Vector2 (playerPosition.x + 5, Random.Range(minY, maxY)), Quaternion.identity);
         Debug.Log("works");
 
+=======
+        transform.position += new Vector3(-speed, 0, 0) * Time.deltaTime;
+        if (transform.position.x < -10)
+        {
+            Destroy(gameObject); 
+        }
+>>>>>>> development-branch
     }
 }
