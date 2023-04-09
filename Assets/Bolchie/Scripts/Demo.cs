@@ -80,14 +80,14 @@ public class Demo : MonoBehaviour {
 	//attacking and jumping//
 	private void HandleInput()
 	{
-		if (Input.GetKeyDown (KeyCode.LeftAlt) && !dead) 
+		if (Input.GetKeyDown (KeyCode.Z) && !dead) 
 		{
 			attack = true;
 			anim.SetBool ("Attack", true);
 			anim.SetFloat ("Speed", 0);
 
 		}
-		if (Input.GetKeyUp(KeyCode.LeftAlt))
+		if (Input.GetKeyUp(KeyCode.Z))
 			{
 			attack = false;
 			anim.SetBool ("Attack", false);
@@ -100,7 +100,7 @@ public class Demo : MonoBehaviour {
 		}
 
 		//dead animation for testing//
-		if (Input.GetKeyDown (KeyCode.Z)) 
+		if (Input.GetKeyDown (KeyCode.LeftAlt)) 
 		{
 			if (!dead) {
 				anim.SetBool ("Dead", true);
