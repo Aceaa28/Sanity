@@ -22,8 +22,7 @@ public class Demo : MonoBehaviour {
 	public LayerMask whatIsGround;
 
 	//variable for how high player jumps//
-	[SerializeField]
-	private float jumpForce = 50f;
+	[SerializeField] private float jumpForce = 50f;
 
 	public Rigidbody2D rb { get; set; }
 
@@ -35,6 +34,12 @@ public class Demo : MonoBehaviour {
 	
 	CircleCollider2D circleCol;
 	bool circleColActive = true;
+
+	//for DialogueTrigger
+	private bool inTriggerArea;
+	private Collider2D dialogueTrigger;
+	private DialogueTriggerController stopMovement;
+
 	void Start () {
 		GetComponent<Rigidbody2D> ().freezeRotation = true;
 		rb = GetComponent<Rigidbody2D> ();
@@ -45,13 +50,22 @@ public class Demo : MonoBehaviour {
 
 	void Update()
 	{
-		HandleInput ();
+		if (!inDialogue())
+		{
+			HandleInput();
+		}
 
 		if (circleColActive == false)
 		{
 			circleCol.isTrigger = true;
 			//circleColActive = true;
 		}
+
+		//if in the collider of DialogueTrigger, then do ActivateDialogue method in DialogueTriggerController
+		if (inTriggerArea)
+        {
+			dialogueTrigger.gameObject.GetComponent<DialogueTriggerController>().ActivateDialogue();
+        }
 	}
 
 	//movement//
@@ -110,8 +124,6 @@ public class Demo : MonoBehaviour {
 					anim.SetBool ("Dead", false);
 					dead = false;
 				}
-
-
 		}
 	}
 		
@@ -129,6 +141,39 @@ public class Demo : MonoBehaviour {
 		{
 			circleColActive = false;
 		}
-
 	}
+
+	private void OnTriggerEnter2D(Collider2D other)
+    {
+		if (other.CompareTag("Trigger"))
+        {
+			inTriggerArea = true;
+			dialogueTrigger = other;
+
+			stopMovement = other.gameObject.GetComponent<DialogueTriggerController>();
+        }
+    }
+
+	private void OnTriggerExit2D(Collider2D other)
+    {
+		if (other.CompareTag("Trigger"))
+        {
+			inTriggerArea = false;
+			dialogueTrigger = null;
+
+			stopMovement = null;
+        }
+    }
+
+	private bool inDialogue()
+    {
+		if (stopMovement != null)
+        {
+			return stopMovement.DialogueActive();
+        }
+        else
+        {
+			return false;
+        }
+    }
 }
