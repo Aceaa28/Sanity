@@ -52,6 +52,7 @@ public class Demo : MonoBehaviour {
 	{
 		if (!inDialogue())
 		{
+			playerMovement();
 			HandleInput();
 		}
 
@@ -71,6 +72,7 @@ public class Demo : MonoBehaviour {
 	//movement//
 	void FixedUpdate ()
 	{
+		/*
 		grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
 		anim.SetBool ("Ground", grounded);
 
@@ -88,6 +90,31 @@ public class Demo : MonoBehaviour {
 
 		else if (horizontal < 0 && facingRight && !dead && !attack){
 			Flip (horizontal);
+		}
+		*/
+	}
+
+	private void playerMovement()
+    {
+		grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+		anim.SetBool("Ground", grounded);
+
+		horizontal = Input.GetAxis("Horizontal");
+		vertical = Input.GetAxis("Vertical");
+		if (!dead && !attack)
+		{
+			anim.SetFloat("vSpeed", rb.velocity.y);
+			anim.SetFloat("Speed", Mathf.Abs(horizontal));
+			rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+		}
+		if (horizontal > 0 && !facingRight && !dead && !attack)
+		{
+			Flip(horizontal);
+		}
+
+		else if (horizontal < 0 && facingRight && !dead && !attack)
+		{
+			Flip(horizontal);
 		}
 	}
 
