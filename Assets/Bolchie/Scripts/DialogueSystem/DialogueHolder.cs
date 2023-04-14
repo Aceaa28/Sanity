@@ -33,7 +33,6 @@ namespace DialogueSystem
             }
 
             gameObject.SetActive(false);
-            Destroy(this.gameObject);
         }
 
         private void Deactivate()

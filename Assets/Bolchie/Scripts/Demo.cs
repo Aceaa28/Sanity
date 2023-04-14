@@ -170,25 +170,27 @@ public class Demo : MonoBehaviour {
 		}
 	}
 
-	private void OnTriggerEnter2D(Collider2D other)
+	private void OnTriggerEnter2D(Collider2D collision)
     {
-		if (other.CompareTag("Trigger"))
+		if (collision.CompareTag("Trigger"))
         {
 			inTriggerArea = true;
-			dialogueTrigger = other;
+			dialogueTrigger = collision;
 
-			stopMovement = other.gameObject.GetComponent<DialogueTriggerController>();
+			stopMovement = collision.gameObject.GetComponent<DialogueTriggerController>();
         }
     }
 
-	private void OnTriggerExit2D(Collider2D other)
+	private void OnTriggerExit2D(Collider2D collision)
     {
-		if (other.CompareTag("Trigger"))
+		if (collision.CompareTag("Trigger"))
         {
 			inTriggerArea = false;
 			dialogueTrigger = null;
 
 			stopMovement = null;
+
+			Destroy(collision.gameObject);
         }
     }
 
