@@ -38,7 +38,7 @@ public class Demo : MonoBehaviour {
 	//for DialogueTrigger
 	private bool inTriggerArea;
 	private Collider2D dialogueTrigger;
-	private DialogueTriggerController stopMovement;
+	private DialogueTriggerController dtc;
 
 	void Start () {
 		GetComponent<Rigidbody2D> ().freezeRotation = true;
@@ -172,33 +172,49 @@ public class Demo : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D collision)
     {
-		if (collision.CompareTag("Trigger"))
+		if (collision.CompareTag("Trigger-Destroy"))
         {
 			inTriggerArea = true;
 			dialogueTrigger = collision;
 
-			stopMovement = collision.gameObject.GetComponent<DialogueTriggerController>();
+			dtc = collision.gameObject.GetComponent<DialogueTriggerController>();
+        }
+
+		if (collision.CompareTag("Trigger-Reset"))
+        {
+			inTriggerArea = true;
+			dialogueTrigger = collision;
+
+			dtc = collision.gameObject.GetComponent<DialogueTriggerController>();
         }
     }
 
 	private void OnTriggerExit2D(Collider2D collision)
     {
-		if (collision.CompareTag("Trigger"))
+		if (collision.CompareTag("Trigger-Destroy"))
         {
 			inTriggerArea = false;
 			dialogueTrigger = null;
 
-			stopMovement = null;
+			dtc = null;
 
 			Destroy(collision.gameObject);
+        }
+
+		if (collision.CompareTag("Trigger-Reset"))
+        {
+			inTriggerArea = false;
+			dialogueTrigger = null;
+
+			dtc = null;
         }
     }
 
 	private bool inDialogue()
     {
-		if (stopMovement != null)
+		if (dtc != null)
         {
-			return stopMovement.DialogueActive();
+			return dtc.DialogueActive();
         }
         else
         {
