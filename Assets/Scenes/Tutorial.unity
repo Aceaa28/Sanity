@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 17623318}
   - component: {fileID: 17623320}
-  - component: {fileID: 17623319}
   m_Layer: 0
   m_Name: background (3)
   m_TagString: Untagged
@@ -156,19 +155,6 @@ Transform:
   m_Father: {fileID: 1207528625}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &17623319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 17623317}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a7a3ed19f62446aa88a77155450c842, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: 0
 --- !u!212 &17623320
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -380,7 +366,7 @@ Transform:
   m_Children:
   - {fileID: 1699548243}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &306813181
 PrefabInstance:
@@ -581,7 +567,7 @@ Transform:
   - {fileID: 2002191070}
   - {fileID: 53681563}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -825,12 +811,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 573047873}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.29, y: -9.81, z: 0}
   m_LocalScale: {x: -5.07, y: 0.64, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 1207528625}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &665368449
 GameObject:
@@ -842,7 +828,6 @@ GameObject:
   m_Component:
   - component: {fileID: 665368450}
   - component: {fileID: 665368452}
-  - component: {fileID: 665368451}
   m_Layer: 0
   m_Name: background (1)
   m_TagString: Untagged
@@ -865,19 +850,6 @@ Transform:
   m_Father: {fileID: 1207528625}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &665368451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 665368449}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a7a3ed19f62446aa88a77155450c842, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: 0
 --- !u!212 &665368452
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1031,6 +1003,7 @@ Transform:
   - {fileID: 665368450}
   - {fileID: 2030686138}
   - {fileID: 17623318}
+  - {fileID: 573047877}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1079,7 +1052,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1372136986
 GameObject:
@@ -1325,9 +1298,9 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1515894641}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a7a3ed19f62446aa88a77155450c842, type: 3}
+  m_Script: {fileID: 11500000, guid: 7807278c6330040f0805dcbcfe5c2d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: 0
@@ -1772,7 +1745,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2030686138}
   - component: {fileID: 2030686140}
-  - component: {fileID: 2030686139}
   m_Layer: 0
   m_Name: background (2)
   m_TagString: Untagged
@@ -1795,19 +1767,6 @@ Transform:
   m_Father: {fileID: 1207528625}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2030686139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030686137}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a7a3ed19f62446aa88a77155450c842, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: 0
 --- !u!212 &2030686140
 SpriteRenderer:
   m_ObjectHideFlags: 0
