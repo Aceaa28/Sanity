@@ -22,8 +22,7 @@ public class Demo : MonoBehaviour {
 	public LayerMask whatIsGround;
 
 	//variable for how high player jumps//
-	[SerializeField]
-	private float jumpForce = 50f;
+	[SerializeField] private float jumpForce = 50f;
 
 	public Rigidbody2D rb { get; set; }
 
@@ -35,6 +34,12 @@ public class Demo : MonoBehaviour {
 	
 	CircleCollider2D circleCol;
 	bool circleColActive = true;
+
+	//for DialogueTrigger
+	private bool inTriggerArea;
+	private Collider2D dialogueTrigger;
+	private DialogueTriggerController dtc;
+
 	void Start () {
 		GetComponent<Rigidbody2D> ().freezeRotation = true;
 		rb = GetComponent<Rigidbody2D> ();
@@ -45,18 +50,29 @@ public class Demo : MonoBehaviour {
 
 	void Update()
 	{
-		HandleInput ();
+		if (!inDialogue())
+		{
+			playerMovement();
+			HandleInput();
+		}
 
 		if (circleColActive == false)
 		{
 			circleCol.isTrigger = true;
 			//circleColActive = true;
 		}
+
+		//if in the collider of DialogueTrigger, then do ActivateDialogue method in DialogueTriggerController
+		if (inTriggerArea)
+        {
+			dialogueTrigger.gameObject.GetComponent<DialogueTriggerController>().ActivateDialogue();
+        }
 	}
 
 	//movement//
 	void FixedUpdate ()
 	{
+		/*
 		grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
 		anim.SetBool ("Ground", grounded);
 
@@ -75,19 +91,44 @@ public class Demo : MonoBehaviour {
 		else if (horizontal < 0 && facingRight && !dead && !attack){
 			Flip (horizontal);
 		}
+		*/
+	}
+
+	private void playerMovement()
+    {
+		grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+		anim.SetBool("Ground", grounded);
+
+		horizontal = Input.GetAxis("Horizontal");
+		vertical = Input.GetAxis("Vertical");
+		if (!dead && !attack)
+		{
+			anim.SetFloat("vSpeed", rb.velocity.y);
+			anim.SetFloat("Speed", Mathf.Abs(horizontal));
+			rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+		}
+		if (horizontal > 0 && !facingRight && !dead && !attack)
+		{
+			Flip(horizontal);
+		}
+
+		else if (horizontal < 0 && facingRight && !dead && !attack)
+		{
+			Flip(horizontal);
+		}
 	}
 
 	//attacking and jumping//
 	private void HandleInput()
 	{
-		if (Input.GetKeyDown (KeyCode.LeftAlt) && !dead) 
+		if (Input.GetKeyDown (KeyCode.Z) && !dead) 
 		{
 			attack = true;
 			anim.SetBool ("Attack", true);
 			anim.SetFloat ("Speed", 0);
 
 		}
-		if (Input.GetKeyUp(KeyCode.LeftAlt))
+		if (Input.GetKeyUp(KeyCode.Z))
 			{
 			attack = false;
 			anim.SetBool ("Attack", false);
@@ -100,7 +141,7 @@ public class Demo : MonoBehaviour {
 		}
 
 		//dead animation for testing//
-		if (Input.GetKeyDown (KeyCode.Z)) 
+		if (Input.GetKeyDown (KeyCode.LeftAlt)) 
 		{
 			if (!dead) {
 				anim.SetBool ("Dead", true);
@@ -110,8 +151,6 @@ public class Demo : MonoBehaviour {
 					anim.SetBool ("Dead", false);
 					dead = false;
 				}
-
-
 		}
 	}
 		
@@ -129,6 +168,57 @@ public class Demo : MonoBehaviour {
 		{
 			circleColActive = false;
 		}
-
 	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+    {
+		if (collision.CompareTag("Trigger-Destroy"))
+        {
+			inTriggerArea = true;
+			dialogueTrigger = collision;
+
+			dtc = collision.gameObject.GetComponent<DialogueTriggerController>();
+        }
+
+		if (collision.CompareTag("Trigger-Reset"))
+        {
+			inTriggerArea = true;
+			dialogueTrigger = collision;
+
+			dtc = collision.gameObject.GetComponent<DialogueTriggerController>();
+        }
+    }
+
+	private void OnTriggerExit2D(Collider2D collision)
+    {
+		if (collision.CompareTag("Trigger-Destroy"))
+        {
+			inTriggerArea = false;
+			dialogueTrigger = null;
+
+			dtc = null;
+
+			Destroy(collision.gameObject);
+        }
+
+		if (collision.CompareTag("Trigger-Reset"))
+        {
+			inTriggerArea = false;
+			dialogueTrigger = null;
+
+			dtc = null;
+        }
+    }
+
+	private bool inDialogue()
+    {
+		if (dtc != null)
+        {
+			return dtc.DialogueActive();
+        }
+        else
+        {
+			return false;
+        }
+    }
 }

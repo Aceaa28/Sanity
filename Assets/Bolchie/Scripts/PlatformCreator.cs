@@ -20,7 +20,7 @@ public class PlatformCreator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (lastCreatedPlatform.transform.position.x < 19)
+        if (lastCreatedPlatform.transform.position.x < 0)
         {
             randomPlatform = Random.Range(0, referencePoint.Length);
             lastCreatedPlatform = Instantiate(platformPrefab, referencePoint[randomPlatform].transform.position, Quaternion.identity);
