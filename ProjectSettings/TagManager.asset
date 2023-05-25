@@ -4,12 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Undefined
   - Platform
+  - Trigger-Destroy
+  - Trigger-Reset
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemies
   - Water
   - UI
   - bg
