@@ -22,8 +22,8 @@ public class Player : MonoBehaviour
 	public LayerMask whatIsGround;
 
 	//variable for how high player jumps//
-	[SerializeField]
-	private float jumpForce = 50f;
+	public float jumpForce;
+	public float JumpHeight;
 
 	public Rigidbody2D rb { get; set; }
 
@@ -35,7 +35,10 @@ public class Player : MonoBehaviour
 	
 	CircleCollider2D circleCol;
 	bool circleColActive = true;
-	void Start () {
+
+
+	void Start () 
+	{
 		GetComponent<Rigidbody2D> ().freezeRotation = true;
 		rb = GetComponent<Rigidbody2D> ();
 		anim = GetComponentInChildren<Animator> ();
@@ -96,7 +99,7 @@ public class Player : MonoBehaviour
 		if (grounded && vertical > 0 && !dead)
 		{
 			anim.SetBool ("Ground", false);
-			rb.AddForce (new Vector2 (0,jumpForce));
+			rb.AddForce (new Vector2 (0,JumpHeight * Time.deltaTime), ForceMode2D.Impulse);
 		}
 
 		//dead animation for testing//
