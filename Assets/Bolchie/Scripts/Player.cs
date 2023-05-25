@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 //Basic Player Script//
 //controls: 
@@ -23,7 +24,7 @@ public class Player : MonoBehaviour
 
 	//variable for how high player jumps//
 	public float jumpForce;
-	public float JumpHeight;
+	public float JumpHeight = 1;
 
 	public Rigidbody2D rb { get; set; }
 
@@ -61,6 +62,7 @@ public class Player : MonoBehaviour
 	void FixedUpdate ()
 	{
 		grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
+		Debug.Log("Grounded: " + grounded);
 		anim.SetBool ("Ground", grounded);
 
 		horizontal = Input.GetAxis("Horizontal");
@@ -99,16 +101,19 @@ public class Player : MonoBehaviour
 		if (grounded && vertical > 0 && !dead)
 		{
 			anim.SetBool ("Ground", false);
-			rb.AddForce (new Vector2 (0,JumpHeight * Time.deltaTime), ForceMode2D.Impulse);
+			grounded = false;
+			Debug.Log("Jumped: " + grounded);
+			rb.AddForce (Vector2.up * jumpForce, ForceMode2D.Impulse);
 		}
 
 		//dead animation for testing//
 		if (Input.GetKeyDown (KeyCode.Z)) 
 		{
 			if (!dead) {
-				anim.SetBool ("Dead", true);
-				anim.SetFloat ("Speed", 0);
-				dead = true;
+				//anim.SetBool ("Dead", true);
+				//anim.SetFloat ("Speed", 0);
+				//dead = true;
+				anim.SetBool("HoldBat", true);
 			} else {
 					anim.SetBool ("Dead", false);
 					dead = false;
