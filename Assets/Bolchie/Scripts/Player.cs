@@ -23,8 +23,7 @@ public class Player : MonoBehaviour
 	public LayerMask whatIsGround;
 
 	//variable for how high player jumps//
-	public float jumpForce;
-	public float JumpHeight = 1;
+	[SerializeField] float jumpForce = 6f;
 
 	public Rigidbody2D rb { get; set; }
 
@@ -109,18 +108,19 @@ public class Player : MonoBehaviour
 		//dead animation for testing//
 		if (Input.GetKeyDown (KeyCode.Z)) 
 		{
-			if (!dead) {
+			//if (!dead) 
+			//{
 				//anim.SetBool ("Dead", true);
 				//anim.SetFloat ("Speed", 0);
 				//dead = true;
-				anim.SetBool("HoldBat", true);
-			} else {
-					anim.SetBool ("Dead", false);
-					dead = false;
-				}
+			anim.SetBool("HoldBat", true);
+		} 
 
-
+		else 
+		{
+			anim.SetBool ("HoldBat", false);
 		}
+
 	}
 		
 	private void Flip (float horizontal)
