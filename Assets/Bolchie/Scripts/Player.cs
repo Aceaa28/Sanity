@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
 	CircleCollider2D circleCol;
 	bool circleColActive = true;
 
+	bool holdBat = false;
+
 
 	void Start () 
 	{
@@ -113,13 +115,21 @@ public class Player : MonoBehaviour
 				//anim.SetBool ("Dead", true);
 				//anim.SetFloat ("Speed", 0);
 				//dead = true;
-			anim.SetBool("HoldBat", true);
+				bool batStatus = false;
+			if(anim.GetBool("HoldBat"))
+			{
+				batStatus = anim.GetBool("HoldBat");
+			}
+				
+				
+			
+
+			anim.SetBool("HoldBat", !batStatus);
+			
+
+			
 		} 
 
-		else 
-		{
-			anim.SetBool ("HoldBat", false);
-		}
 
 	}
 		
