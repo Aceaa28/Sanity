@@ -24,7 +24,6 @@ public class Player : MonoBehaviour
 
 	//variable for how high player jumps//
 	public float jumpForce;
-	public float JumpHeight = 1;
 
 	public Rigidbody2D rb { get; set; }
 

@@ -2579,8 +2579,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  jumpForce: 2
-  JumpHeight: 501.94
+  jumpForce: 5
 --- !u!4 &1928260132 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5110317206890557247, guid: f9fa824be804e4d40849a51d356db6e4, type: 3}
@@ -2779,7 +2778,7 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 49677976885761885, guid: 6d689f49362ee4b17a371654056fccb9, type: 3}
+    - target: {fileID: 0}
       propertyPath: jumpForce
       value: 15.71
       objectReference: {fileID: 0}
@@ -2845,7 +2844,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 113207845718775657, guid: 6d689f49362ee4b17a371654056fccb9, type: 3}
       propertyPath: m_GravityScale
-      value: 6.09
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 141704704114427287, guid: 6d689f49362ee4b17a371654056fccb9, type: 3}
       propertyPath: m_IsTrigger
@@ -2855,6 +2854,5 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 49677976885761885, guid: 6d689f49362ee4b17a371654056fccb9, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d689f49362ee4b17a371654056fccb9, type: 3}
