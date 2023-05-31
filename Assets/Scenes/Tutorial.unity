@@ -168,7 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a7a3ed19f62446aa88a77155450c842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 1
 --- !u!212 &17623320
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -518,6 +517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da4c8edc9a2fb9478454072203832e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueTrigger: {fileID: 0}
 --- !u!114 &216788897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1681,7 +1681,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a7a3ed19f62446aa88a77155450c842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 1
 --- !u!212 &665368452
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2264,10 +2263,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec4788d3be03749e3b1966aba99d62cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformPrefab: {fileID: 6603022764049128199, guid: f9fa824be804e4d40849a51d356db6e4, type: 3}
-  referencePoint:
-  - {fileID: 2002191066}
-  - {fileID: 53681562}
 --- !u!4 &1283998383
 Transform:
   m_ObjectHideFlags: 0
@@ -2531,7 +2526,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a7a3ed19f62446aa88a77155450c842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 1
 --- !u!1 &1541277483
 GameObject:
   m_ObjectHideFlags: 0
@@ -2971,6 +2965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da4c8edc9a2fb9478454072203832e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueTrigger: {fileID: 547589354}
 --- !u!1 &1815423899
 GameObject:
   m_ObjectHideFlags: 0
@@ -3681,7 +3676,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a7a3ed19f62446aa88a77155450c842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 1
 --- !u!212 &2030686140
 SpriteRenderer:
   m_ObjectHideFlags: 0
