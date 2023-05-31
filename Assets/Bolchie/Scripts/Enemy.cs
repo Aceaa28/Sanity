@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     //define variable and  
     public float moveRange = 19f;
     private Vector2 initialPosition;
+    //public bool inRange;
  
     // Start is called before the first frame update
     void Start()

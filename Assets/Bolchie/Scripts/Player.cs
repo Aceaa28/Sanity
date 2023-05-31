@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
 	public Transform groundCheck;
 	float groundRadius = 0.2f;
 	public LayerMask whatIsGround;
+	public GameObject enemy;
 
 	//variable for how high player jumps//
 	public float jumpForce;
@@ -105,18 +106,19 @@ public class Player : MonoBehaviour
 			rb.AddForce (Vector2.up * jumpForce, ForceMode2D.Impulse);
 		}
 
-		//dead animation for testing//
+		//dead animation for bat//
 		if (Input.GetKeyDown (KeyCode.Z)) 
 		{
-			if (!dead) {
-				//anim.SetBool ("Dead", true);
-				//anim.SetFloat ("Speed", 0);
-				//dead = true;
+			if (!dead) 
+			{
 				anim.SetBool("HoldBat", true);
-			} else {
-					anim.SetBool ("Dead", false);
-					dead = false;
-				}
+			} 
+			
+			else 
+			{
+				anim.SetBool ("Dead", false);
+				dead = false;
+			}
 
 
 		}
