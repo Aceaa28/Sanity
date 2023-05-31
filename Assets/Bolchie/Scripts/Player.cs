@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
 	public GameObject enemy;
 
 	//variable for how high player jumps//
-	public float jumpForce;
+	public float jumpForce = 1.5f;
 
 	public Rigidbody2D rb { get; set; }
 
@@ -36,12 +36,6 @@ public class Player : MonoBehaviour
 	
 	CircleCollider2D circleCol;
 	bool circleColActive = true;
-
-	[SerializeField] private Animator normalAnimator;
-	[SerializeField] private Animator batModeAnimator;
-	[SerializeField] private SpriteRenderer playerSpriteRenderer;
-	[SerializeField] private Sprite normalSprite;
-	[SerializeField] private Sprite batModeSprite;
 
 	private bool isBatMode = false;
 	bool holdBat;
@@ -65,18 +59,9 @@ public class Player : MonoBehaviour
 			//circleColActive = true;
 		}
 
-		//dead animation for bat//
+		//animation for bat//
 		if (Input.GetKeyDown (KeyCode.Z)) 
 		{
-			// Toggle the bat mode
-			//isBatMode = !isBatMode;
-
-			 // Swap sprites based on bat mode
-			//playerSpriteRenderer.sprite = isBatMode ? batModeSprite : normalSprite;
-
-			// Activate/deactivate animators based on bat mode
-			//normalAnimator.enabled = !isBatMode;
-			//batModeAnimator.enabled = isBatMode;
 			holdBat = anim.GetBool("HoldBat");
 
 			if(!holdBat)
@@ -88,19 +73,6 @@ public class Player : MonoBehaviour
 				anim.SetBool("HoldBat", false);
 				holdBat = false;
 			}
-		}
-
-		// Check if the player is in bat mode
-		if (isBatMode)
-		{
-			// Handle bat mode movement
-			//BatModeMovement();
-		}
-		else
-		{
-			// Handle normal movement
-			FixedUpdate();
-			HandleInput();
 		}
 		
 		Debug.Log(holdBat);

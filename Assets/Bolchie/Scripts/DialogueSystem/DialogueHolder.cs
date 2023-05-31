@@ -8,6 +8,7 @@ namespace DialogueSystem
         private IEnumerator dialogueSeq;
         private IEnumerator dialogueSeq2;
         private bool dialogueFinished;
+        public GameObject dialogueTrigger;
 
         private void Awake()
         {
@@ -34,10 +35,15 @@ namespace DialogueSystem
             {
                     Deactivate();
                     transform.GetChild(i).gameObject.SetActive(true);
+                    if (i == (transform.childCount - 1))
+                    {
+                        Debug.Log("Here");
+                        gameObject.SetActive(false);
+                        dialogueFinished = true;
+                        dialogueTrigger.SetActive(false);
+                    }
                     yield return new WaitUntil(() => transform.GetChild(i).GetComponent<DialogueLine>().finished);
             }
-
-            gameObject.SetActive(false);
         }
 
         private IEnumerator dialogueSequence2()
