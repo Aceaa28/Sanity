@@ -43,7 +43,8 @@ public class Player : MonoBehaviour
 	[SerializeField] private Sprite normalSprite;
 	[SerializeField] private Sprite batModeSprite;
 
-private bool isBatMode = false;
+	private bool isBatMode = false;
+	bool holdBat;
 
 	void Start () 
 	{
@@ -68,35 +69,59 @@ private bool isBatMode = false;
 		if (Input.GetKeyDown (KeyCode.Z)) 
 		{
 			// Toggle the bat mode
-			isBatMode = !isBatMode;
+			//isBatMode = !isBatMode;
 
 			 // Swap sprites based on bat mode
-			playerSpriteRenderer.sprite = isBatMode ? batModeSprite : normalSprite;
+			//playerSpriteRenderer.sprite = isBatMode ? batModeSprite : normalSprite;
 
 			// Activate/deactivate animators based on bat mode
-			normalAnimator.enabled = !isBatMode;
-			batModeAnimator.enabled = isBatMode;
+			//normalAnimator.enabled = !isBatMode;
+			//batModeAnimator.enabled = isBatMode;
+			holdBat = anim.GetBool("HoldBat");
+
+			if(!holdBat)
+			{
+				anim.SetBool("HoldBat", true);
+				holdBat = true;
+			}else if(holdBat)
+			{
+				anim.SetBool("HoldBat", false);
+				holdBat = false;
+			}
 		}
 
 		// Check if the player is in bat mode
 		if (isBatMode)
 		{
 			// Handle bat mode movement
-			BatModeMovement();
+			//BatModeMovement();
 		}
 		else
 		{
 			// Handle normal movement
 			FixedUpdate();
 			HandleInput();
-		}	
+		}
+		
+		Debug.Log(holdBat);
+
+		if(holdBat && ((horizontal > 0) || (horizontal < 0) ))
+		{
+			
+			anim.SetFloat ("BatRun", 0.2f);
+		}else if(holdBat && horizontal == 0)
+		{
+			Debug.Log("Bat in hand but no run");
+			anim.SetFloat ("BatRun", 0);
+		}
+
+		
 	}
 
 	//movement//
 	void FixedUpdate ()
 	{
 		grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
-		Debug.Log("Grounded: " + grounded);
 		anim.SetBool ("Ground", grounded);
 
 		horizontal = Input.GetAxis("Horizontal");
@@ -136,7 +161,6 @@ private bool isBatMode = false;
 		{
 			anim.SetBool ("Ground", false);
 			grounded = false;
-			Debug.Log("Jumped: " + grounded);
 			rb.AddForce (Vector2.up * jumpForce, ForceMode2D.Impulse);
 		}
 	}
@@ -155,11 +179,6 @@ private bool isBatMode = false;
 		{
 			circleColActive = false;
 		}
-
-	}
-
-	void BatModeMovement()
-	{
 
 	}
 }
