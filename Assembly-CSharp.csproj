@@ -36,8 +36,10 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\UIController.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\DialogueSystem\DialogueBaseClass.cs" />
+     <Compile Include="Assets\Scripts\Menu.cs" />
      <Compile Include="Assets\Scripts\DialogueSystem\DialogueLine.cs" />
      <Compile Include="Assets\Scripts\Toggle.cs" />
      <Compile Include="Assets\Scripts\Core\SoundManager.cs" />
@@ -45,8 +47,6 @@
      <Compile Include="Assets\Scripts\Demo.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\DialogueSystem\DialogueTriggerController.cs" />
-     <Compile Include="Assets\Scripts\UIController.cs" />
-     <Compile Include="Assets\Scripts\Menu.cs" />
      <None Include="Assets\Bolchie\Package Information.txt" />
      <None Include="Assets\War\Slime Enemy - Pixel Art\README.txt" />
      <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
