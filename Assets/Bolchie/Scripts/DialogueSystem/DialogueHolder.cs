@@ -37,7 +37,6 @@ namespace DialogueSystem
                     transform.GetChild(i).gameObject.SetActive(true);
                     if (i == (transform.childCount - 1))
                     {
-                        Debug.Log("Here");
                         gameObject.SetActive(false);
                         dialogueFinished = true;
                         dialogueTrigger.SetActive(false);
