@@ -198,7 +198,9 @@ public class Demo : MonoBehaviour {
 
 			dtc = null;
 
-			Destroy(collision.gameObject);
+			circleColActive = false;
+
+			//Destroy(collision.gameObject);
         }
 
 		if (collision.CompareTag("Trigger-Reset"))
@@ -207,6 +209,8 @@ public class Demo : MonoBehaviour {
 			dialogueTrigger = null;
 
 			dtc = null;
+
+			circleColActive = false;
         }
     }
 
