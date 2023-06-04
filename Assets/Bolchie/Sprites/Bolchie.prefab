@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 113207845718775657}
   - component: {fileID: 143769723098236535}
   - component: {fileID: 141704704114427287}
-  - component: {fileID: 49677976885761885}
   m_Layer: 8
   m_Name: Bolchie
   m_TagString: Player
@@ -170,23 +169,6 @@ CircleCollider2D:
   m_Offset: {x: -0.15, y: -2.8}
   serializedVersion: 2
   m_Radius: 0.46
---- !u!114 &49677976885761885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 81080586105232365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20b16551228cbc94a91368cac6dd55b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundCheck: {fileID: 83862755351692947}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 4294967039
-  jumpForce: 600
 --- !u!1 &81291550044650981
 GameObject:
   m_ObjectHideFlags: 0
