@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public float moveRange = 19f;
     private Vector2 initialPosition;
     public GameObject player;
+     public float health = Mathf.Infinity;
     //public bool inRange;
  
     // Start is called before the first frame update
@@ -28,12 +29,12 @@ public class Enemy : MonoBehaviour
     transform.position = initialPosition + new Vector2(movement, 0f);
     }
 
-   void OnTriggerEnter(Collider other)
+   void OnTriggerEnter2D(Collider2D other)
 	{
 		Destroy(gameObject);
 	}
 
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if(GameObject.Find("player"))
         {
