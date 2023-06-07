@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
 	float horizontal;
 	float vertical;
 	
+	// Player attack variables
 	CircleCollider2D circleCol;
 	bool circleColActive = true;
 
@@ -66,15 +67,6 @@ public class Player : MonoBehaviour
 		{
 			holdBat = anim.GetBool("HoldBat");
 
-			//Detect enemies in range of attack
-			Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-			//Damage them
-			foreach(Collider2D enemy in hitEnemies)
-			{
-				Debug.Log("we hit " + enemy.name);
-			}
-
 			if(!holdBat)
 			{
 				anim.SetBool("HoldBat", true);
@@ -87,8 +79,6 @@ public class Player : MonoBehaviour
 				holdBat = false;
 			}
 		}
-		
-		Debug.Log(holdBat);
 
 		if(holdBat && ((horizontal > 0) || (horizontal < 0) ))
 		{
@@ -98,7 +88,6 @@ public class Player : MonoBehaviour
 		
 		else if(holdBat && horizontal == 0)
 		{
-			Debug.Log("Bat in hand but no run");
 			anim.SetFloat ("BatRun", 0);
 		}
 
@@ -120,7 +109,7 @@ public class Player : MonoBehaviour
 		anim.SetBool ("Ground", grounded);
 
 		horizontal = Input.GetAxis("Horizontal");
-		 vertical = Input.GetAxis("Vertical");
+		vertical = Input.GetAxis("Vertical");
 		if (!dead && !attack)
 		{
 			anim.SetFloat ("vSpeed", rb.velocity.y);
@@ -146,6 +135,18 @@ public class Player : MonoBehaviour
 			attack = true;
 			anim.SetBool ("Attack", true);
 			anim.SetFloat ("Speed", 0);
+
+			//Detect enemies in range of attack
+			Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+			//Damage them
+			foreach(Collider2D enemy in hitEnemies)
+			{
+				Enemy enemyScript = enemy.GetComponent<Enemy>();
+				Debug.Log(enemyScript.health);
+				enemyScript.health -= 1;
+				Debug.Log("we hit " + enemy.name);
+			}
 
 		}
 		if (Input.GetKeyUp(KeyCode.LeftAlt))

@@ -165,5 +165,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveRange: 2
-  player: {fileID: 0}
-  health: Infinity

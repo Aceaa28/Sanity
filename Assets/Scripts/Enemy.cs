@@ -7,8 +7,8 @@ public class Enemy : MonoBehaviour
     //define variable and  
     public float moveRange = 19f;
     private Vector2 initialPosition;
-     GameObject player;
-    //public float health = Mathf.Infinity;
+    GameObject player;
+    public float health = 3;
     //public bool inRange;
  
     // Start is called before the first frame update
@@ -22,11 +22,16 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    // Calculate the movement within the defined range
-    float movement = Mathf.PingPong(Time.time, moveRange) - (moveRange / 2f);
+        // Calculate the movement within the defined range
+        float movement = Mathf.PingPong(Time.time, moveRange) - (moveRange / 2f);
 
-    // Set the new position of the enemy
-    transform.position = initialPosition + new Vector2(movement, 0f);
+        // Set the new position of the enemy
+        transform.position = initialPosition + new Vector2(movement, 0f);
+
+        if (health <= 0 )
+        {
+            Destroy(gameObject);
+        }
     }
 
    //void OnTriggerEnter2D(Collider2D other)
@@ -34,11 +39,18 @@ public class Enemy : MonoBehaviour
 	//	Destroy(gameObject);
 	//}
 
-    //private void OnCollisionEnter2D(Collision2D other)
-    //{
-    //    if(GameObject.Find("player"))
-        //{
-    //      Destroy(GetComponent<Collider>());
-     //   }
-    //}
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+       if(other.gameObject.CompareTag("Player"))
+        {
+           
+          PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
+
+          if(playerHealth != null)
+          {
+             playerHealth.TakeDamage(0.5f);
+             
+          }
+        }
+    }
 }

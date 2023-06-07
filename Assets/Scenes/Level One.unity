@@ -1532,7 +1532,7 @@ PrefabInstance:
     - target: {fileID: 4168519735664297795, guid: ad7ad6b232cf6ab4abaa583b64df2905, type: 3}
       propertyPath: anim
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1714661350}
     - target: {fileID: 4168519735664297795, guid: ad7ad6b232cf6ab4abaa583b64df2905, type: 3}
       propertyPath: enemy.Array.size
       value: 2
@@ -2520,6 +2520,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5110317206890557247, guid: f9fa824be804e4d40849a51d356db6e4, type: 3}
   m_PrefabInstance: {fileID: 1702056233}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1714661345 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4105454098034502371, guid: ad7ad6b232cf6ab4abaa583b64df2905, type: 3}
+  m_PrefabInstance: {fileID: 1188845927}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1714661346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714661345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a9d6610359f104ebf6f407b1d235a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+--- !u!95 &1714661350 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4155658043551573847, guid: ad7ad6b232cf6ab4abaa583b64df2905, type: 3}
+  m_PrefabInstance: {fileID: 1188845927}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1898386881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2829,6 +2852,10 @@ PrefabInstance:
     - target: {fileID: 3889965441015383559, guid: bf288484b36e69d40861e2f1b3018170, type: 3}
       propertyPath: m_Name
       value: Portal
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889965441015383559, guid: bf288484b36e69d40861e2f1b3018170, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3889965441015383578, guid: bf288484b36e69d40861e2f1b3018170, type: 3}
       propertyPath: scene
