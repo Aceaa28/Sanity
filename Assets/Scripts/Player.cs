@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
 	private float speed = 10f;
 
 	private bool facingRight = true;
-	private Animator anim;
+	public Animator anim;
 	bool grounded = false;
 	public Transform groundCheck;
 	public Transform attackPoint;
@@ -79,7 +79,9 @@ public class Player : MonoBehaviour
 			{
 				anim.SetBool("HoldBat", true);
 				holdBat = true;
-			}else if(holdBat)
+			}
+			
+			else if(holdBat)
 			{
 				anim.SetBool("HoldBat", false);
 				holdBat = false;
@@ -92,7 +94,9 @@ public class Player : MonoBehaviour
 		{
 			
 			anim.SetFloat ("BatRun", 0.2f);
-		}else if(holdBat && horizontal == 0)
+		}
+		
+		else if(holdBat && horizontal == 0)
 		{
 			Debug.Log("Bat in hand but no run");
 			anim.SetFloat ("BatRun", 0);
@@ -123,11 +127,13 @@ public class Player : MonoBehaviour
 			anim.SetFloat ("Speed", Mathf.Abs (horizontal));
 			rb.velocity = new Vector2 (horizontal * speed, rb.velocity.y);
 		}
-		if (horizontal > 0 && !facingRight && !dead && !attack) {
+		if (horizontal > 0 && !facingRight && !dead && !attack) 
+		{
 			Flip (horizontal);
 		}
 
-		else if (horizontal < 0 && facingRight && !dead && !attack){
+		else if (horizontal < 0 && facingRight && !dead && !attack)
+		{
 			Flip (horizontal);
 		}
 	}
