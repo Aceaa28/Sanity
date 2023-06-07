@@ -43,6 +43,10 @@ public class Player : MonoBehaviour
 
 	bool holdBat;
 
+	private bool inTriggerArea;
+    private Collider2D dialogueTrigger;
+    private DialogueTriggerController dtc;
+
 	void Start () 
 	{
 		GetComponent<Rigidbody2D> ().freezeRotation = true;
@@ -55,6 +59,17 @@ public class Player : MonoBehaviour
 	void Update()
 	{
 		HandleInput ();
+
+		if (!inDialogue())
+        {
+            FixedUpdate();
+            HandleInput();
+        }
+
+	if (inTriggerArea)
+        {
+            dialogueTrigger.gameObject.GetComponent<DialogueTriggerController>().ActivateDialogue();
+        }
 
 		if (circleColActive == false)
 		{
@@ -179,6 +194,7 @@ public class Player : MonoBehaviour
 		}
 
 	}
+
 
 	private void OnTriggerEnter2D(Collider2D collision)
     {
