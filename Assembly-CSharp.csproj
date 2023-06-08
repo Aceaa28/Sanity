@@ -51,6 +51,7 @@
      <Compile Include="Assets\Bolchie\Scripts\GameOverScreen\GameOverScreen.cs" />
      <Compile Include="Assets\Bolchie\Scripts\UIController.cs" />
      <Compile Include="Assets\Bolchie\Scripts\CameraMovement.cs" />
+     <Compile Include="Assets\Bolchie\Scripts\Core\ToggleAudio.cs" />
      <Compile Include="Assets\Bolchie\Scripts\Enemy.cs" />
      <Compile Include="Assets\Bolchie\Scripts\Platform.cs" />
      <Compile Include="Assets\Bolchie\Scripts\DialogueSystem\DialogueBaseClass.cs" />
@@ -59,10 +60,13 @@
      <Compile Include="Assets\Bolchie\Scripts\PlatformCreator.cs" />
      <Compile Include="Assets\Bolchie\Scripts\Toggle.cs" />
      <Compile Include="Assets\Bolchie\Scripts\Core\SoundManager.cs" />
+     <Compile Include="Assets\Bolchie\Scripts\Core\MusicManager.cs" />
      <Compile Include="Assets\Bolchie\Scripts\DialogueSystem\DialogueHolder.cs" />
      <Compile Include="Assets\Bolchie\Scripts\Demo.cs" />
+     <Compile Include="Assets\Bolchie\Scripts\Core\VolumeSlider.cs" />
      <Compile Include="Assets\Bolchie\Scripts\Player.cs" />
      <Compile Include="Assets\Bolchie\Scripts\DialogueSystem\DialogueTriggerController.cs" />
+     <Compile Include="Assets\Bolchie\Scripts\Core\Sound.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

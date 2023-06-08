@@ -14,3 +14,4 @@ public class DialogueTriggerController : MonoBehaviour
         return dialogue.activeInHierarchy;
     }
 }
+ 

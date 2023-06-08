@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
 	private float speed = 10f;
 
 	private bool facingRight = true;
-	private Animator anim;
+	public Animator anim;
 	bool grounded = false;
 	public Transform groundCheck;
 	public Transform attackPoint;
@@ -37,10 +37,15 @@ public class Player : MonoBehaviour
 	float horizontal;
 	float vertical;
 	
+	// Player attack variables
 	CircleCollider2D circleCol;
 	bool circleColActive = true;
 
 	bool holdBat;
+
+	private bool inTriggerArea;
+    private Collider2D dialogueTrigger;
+    private DialogueTriggerController dtc;
 
 	void Start () 
 	{
@@ -55,6 +60,17 @@ public class Player : MonoBehaviour
 	{
 		HandleInput ();
 
+		if (!inDialogue())
+        {
+            FixedUpdate();
+            HandleInput();
+        }
+
+	if (inTriggerArea)
+        {
+            dialogueTrigger.gameObject.GetComponent<DialogueTriggerController>().ActivateDialogue();
+        }
+
 		if (circleColActive == false)
 		{
 			circleCol.isTrigger = true;
@@ -66,20 +82,13 @@ public class Player : MonoBehaviour
 		{
 			holdBat = anim.GetBool("HoldBat");
 
-			//Detect enemies in range of attack
-			Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-			//Damage them
-			foreach(Collider2D enemy in hitEnemies)
-			{
-				Debug.Log("we hit " + enemy.name);
-			}
-
 			if(!holdBat)
 			{
 				anim.SetBool("HoldBat", true);
 				holdBat = true;
-			}else if(holdBat)
+			}
+			
+			else if(holdBat)
 			{
 				anim.SetBool("HoldBat", false);
 				holdBat = false;
@@ -90,9 +99,10 @@ public class Player : MonoBehaviour
 		{
 			
 			anim.SetFloat ("BatRun", 0.2f);
-		}else if(holdBat && horizontal == 0)
+		}
+		
+		else if(holdBat && horizontal == 0)
 		{
-			Debug.Log("Bat in hand but no run");
 			anim.SetFloat ("BatRun", 0);
 		}
 
@@ -114,19 +124,23 @@ public class Player : MonoBehaviour
 		anim.SetBool ("Ground", grounded);
 
 		horizontal = Input.GetAxis("Horizontal");
-		 vertical = Input.GetAxis("Vertical");
+		vertical = Input.GetAxis("Vertical");
 		if (!dead && !attack)
 		{
 			anim.SetFloat ("vSpeed", rb.velocity.y);
 			anim.SetFloat ("Speed", Mathf.Abs (horizontal));
 			rb.velocity = new Vector2 (horizontal * speed, rb.velocity.y);
 		}
-		if (horizontal > 0 && !facingRight && !dead && !attack) {
+		if (horizontal > 0 && !facingRight && !dead && !attack) 
+		{
 			Flip (horizontal);
+			MusicManager.Instance.PlayEffects("Walking");
 		}
 
-		else if (horizontal < 0 && facingRight && !dead && !attack){
+		else if (horizontal < 0 && facingRight && !dead && !attack)
+		{
 			Flip (horizontal);
+			MusicManager.Instance.PlayEffects("Walking");
 		}
 	}
 
@@ -138,19 +152,34 @@ public class Player : MonoBehaviour
 			attack = true;
 			anim.SetBool ("Attack", true);
 			anim.SetFloat ("Speed", 0);
+			MusicManager.Instance.PlayEffects("Attack");
+
+			//Detect enemies in range of attack
+			Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+			//Damage them
+			foreach(Collider2D enemy in hitEnemies)
+			{
+				Enemy enemyScript = enemy.GetComponent<Enemy>();
+				Debug.Log(enemyScript.health);
+				enemyScript.health -= 1;
+				Debug.Log("we hit " + enemy.name);
+				MusicManager.Instance.PlayEffects("Attack");
+			}
 
 		}
 		if (Input.GetKeyUp(KeyCode.LeftAlt))
 			{
 			attack = false;
 			anim.SetBool ("Attack", false);
-			}
+		}
 
 		if (grounded && vertical > 0 && !dead)
 		{
 			anim.SetBool ("Ground", false);
 			grounded = false;
 			rb.AddForce (Vector2.up * jumpForce, ForceMode2D.Impulse);
+			MusicManager.Instance.PlayEffects("Jump");
 		}
 	}
 		
@@ -170,4 +199,61 @@ public class Player : MonoBehaviour
 		}
 
 	}
+
+
+	private void OnTriggerEnter2D(Collider2D collision)
+    {
+		if (collision.CompareTag("Trigger-Destroy"))
+        {
+			inTriggerArea = true;
+			dialogueTrigger = collision;
+
+			dtc = collision.gameObject.GetComponent<DialogueTriggerController>();
+        }
+
+		if (collision.CompareTag("Trigger-Reset"))
+        {
+			inTriggerArea = true;
+			dialogueTrigger = collision;
+
+			dtc = collision.gameObject.GetComponent<DialogueTriggerController>();
+        }
+    }
+
+	private void OnTriggerExit2D(Collider2D collision)
+    {
+		if (collision.CompareTag("Trigger-Destroy"))
+        {
+			inTriggerArea = false;
+			dialogueTrigger = null;
+
+			dtc = null;
+
+			circleColActive = false;
+        }
+
+		if (collision.CompareTag("Trigger-Reset"))
+        {
+			inTriggerArea = false;
+			dialogueTrigger = null;
+
+			dtc = null;
+
+			circleColActive = false;
+        }
+    }
+
+	private bool inDialogue()
+    {
+		if (dtc != null)
+        {
+			return dtc.DialogueActive();
+        }
+        else
+        {
+			return false;
+        }
+    }
+
+	
 }
