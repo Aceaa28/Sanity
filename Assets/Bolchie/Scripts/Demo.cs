@@ -72,26 +72,7 @@ public class Demo : MonoBehaviour {
 	//movement//
 	void FixedUpdate ()
 	{
-		/*
-		grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
-		anim.SetBool ("Ground", grounded);
-
-		horizontal = Input.GetAxis("Horizontal");
-		 vertical = Input.GetAxis("Vertical");
-		if (!dead && !attack)
-		{
-			anim.SetFloat ("vSpeed", rb.velocity.y);
-			anim.SetFloat ("Speed", Mathf.Abs (horizontal));
-			rb.velocity = new Vector2 (horizontal * speed, rb.velocity.y);
-		}
-		if (horizontal > 0 && !facingRight && !dead && !attack) {
-			Flip (horizontal);
-		}
-
-		else if (horizontal < 0 && facingRight && !dead && !attack){
-			Flip (horizontal);
-		}
-		*/
+	
 	}
 
 	private void playerMovement()
@@ -179,31 +160,11 @@ public class Demo : MonoBehaviour {
 
 			dtc = collision.gameObject.GetComponent<DialogueTriggerController>();
         }
-
-		if (collision.CompareTag("Trigger-Reset"))
-        {
-			inTriggerArea = true;
-			dialogueTrigger = collision;
-
-			dtc = collision.gameObject.GetComponent<DialogueTriggerController>();
-        }
     }
 
 	private void OnTriggerExit2D(Collider2D collision)
     {
 		if (collision.CompareTag("Trigger-Destroy"))
-        {
-			inTriggerArea = false;
-			dialogueTrigger = null;
-
-			dtc = null;
-
-			circleColActive = false;
-
-			//Destroy(collision.gameObject);
-        }
-
-		if (collision.CompareTag("Trigger-Reset"))
         {
 			inTriggerArea = false;
 			dialogueTrigger = null;

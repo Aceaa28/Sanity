@@ -85,8 +85,6 @@ public class Player : MonoBehaviour
 				holdBat = false;
 			}
 		}
-		
-		Debug.Log(holdBat);
 
 		if(holdBat && ((horizontal > 0) || (horizontal < 0) ))
 		{
