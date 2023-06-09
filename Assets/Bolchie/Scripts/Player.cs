@@ -43,9 +43,15 @@ public class Player : MonoBehaviour
 
 	bool holdBat;
 
+	//for dialogue
 	private bool inTriggerArea;
     private Collider2D dialogueTrigger;
     private DialogueTriggerController dtc;
+
+	//for footsteps
+	AudioSource audioSource;
+	bool isMoving = false;
+	bool isJumping;
 
 	void Start () 
 	{
@@ -53,6 +59,7 @@ public class Player : MonoBehaviour
 		rb = GetComponent<Rigidbody2D> ();
 		anim = GetComponentInChildren<Animator> ();
 		circleCol = GetComponent<CircleCollider2D>();
+		audioSource = GetComponent<AudioSource>();   
 
 	}
 
@@ -62,14 +69,17 @@ public class Player : MonoBehaviour
 
 		if (!inDialogue())
         {
-            FixedUpdate();
+            playerMovement();
             HandleInput();
+			anim.enabled = true;
         }
 
 	if (inTriggerArea)
         {
             dialogueTrigger.gameObject.GetComponent<DialogueTriggerController>().ActivateDialogue();
-        }
+			anim.enabled = false;
+			audioSource.Stop();
+		}
 
 		if (circleColActive == false)
 		{
@@ -81,8 +91,9 @@ public class Player : MonoBehaviour
 		if (Input.GetKeyDown (KeyCode.Z)) 
 		{
 			holdBat = anim.GetBool("HoldBat");
+			MusicManager.Instance.PlayEffects("Equip");
 
-			if(!holdBat)
+			if (!holdBat)
 			{
 				anim.SetBool("HoldBat", true);
 				holdBat = true;
@@ -120,39 +131,80 @@ public class Player : MonoBehaviour
 	//movement//
 	void FixedUpdate ()
 	{
-		grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
-		anim.SetBool ("Ground", grounded);
+		
+	}
+
+	private void playerMovement()
+    {
+		grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+		anim.SetBool("Ground", grounded);
 
 		horizontal = Input.GetAxis("Horizontal");
 		vertical = Input.GetAxis("Vertical");
+
 		if (!dead && !attack)
 		{
-			anim.SetFloat ("vSpeed", rb.velocity.y);
-			anim.SetFloat ("Speed", Mathf.Abs (horizontal));
-			rb.velocity = new Vector2 (horizontal * speed, rb.velocity.y);
+			anim.SetFloat("vSpeed", rb.velocity.y);
+			anim.SetFloat("Speed", Mathf.Abs(horizontal));
+			rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
 		}
-		if (horizontal > 0 && !facingRight && !dead && !attack) 
+		if (horizontal > 0 && !facingRight && !dead && !attack)
 		{
-			Flip (horizontal);
-			MusicManager.Instance.PlayEffects("Walking");
+			Flip(horizontal);
 		}
 
 		else if (horizontal < 0 && facingRight && !dead && !attack)
 		{
-			Flip (horizontal);
-			MusicManager.Instance.PlayEffects("Walking");
+			Flip(horizontal);
 		}
+
+		//footsteps audio
+		if (rb.velocity.x != 0 && grounded)
+        {
+			isMoving = true;
+        }
+		else
+        {
+			isMoving = false;
+        }
+		if (isMoving)
+        {
+			if (!audioSource.isPlaying)
+            {
+				audioSource.Play();
+            }
+        }
+		else
+        {
+			audioSource.Stop();
+        }
+
+		/*jump audio
+		if (!grounded)
+        {
+			isMoving = false;
+			isJumping = true;
+        }
+		else
+        {
+			isMoving = true;
+			isJumping = false;
+        }
+		if (isJumping)
+		{
+			MusicManager.Instance.PlayEffects("Jump");
+		}*/
 	}
 
 	//attacking and jumping//
 	private void HandleInput()
 	{
-		if (Input.GetKeyDown (KeyCode.LeftAlt) && !dead) 
+		if (Input.GetKeyDown(KeyCode.LeftAlt) && !dead) 
 		{
 			attack = true;
 			anim.SetBool ("Attack", true);
 			anim.SetFloat ("Speed", 0);
-			MusicManager.Instance.PlayEffects("Attack");
+			MusicManager.Instance.PlayEffects("Swing");
 
 			//Detect enemies in range of attack
 			Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
@@ -166,8 +218,8 @@ public class Player : MonoBehaviour
 				Debug.Log("we hit " + enemy.name);
 				MusicManager.Instance.PlayEffects("Attack");
 			}
-
 		}
+
 		if (Input.GetKeyUp(KeyCode.LeftAlt))
 			{
 			attack = false;
@@ -179,8 +231,13 @@ public class Player : MonoBehaviour
 			anim.SetBool ("Ground", false);
 			grounded = false;
 			rb.AddForce (Vector2.up * jumpForce, ForceMode2D.Impulse);
-			MusicManager.Instance.PlayEffects("Jump");
+			//MusicManager.Instance.PlayEffects("Jump");
 		}
+
+		/*if (!grounded)
+		{
+			MusicManager.Instance.PlayEffects("Jump"); ;
+		}*/
 	}
 		
 	private void Flip (float horizontal)
@@ -197,21 +254,11 @@ public class Player : MonoBehaviour
 		{
 			circleColActive = false;
 		}
-
 	}
-
 
 	private void OnTriggerEnter2D(Collider2D collision)
     {
 		if (collision.CompareTag("Trigger-Destroy"))
-        {
-			inTriggerArea = true;
-			dialogueTrigger = collision;
-
-			dtc = collision.gameObject.GetComponent<DialogueTriggerController>();
-        }
-
-		if (collision.CompareTag("Trigger-Reset"))
         {
 			inTriggerArea = true;
 			dialogueTrigger = collision;
@@ -223,16 +270,6 @@ public class Player : MonoBehaviour
 	private void OnTriggerExit2D(Collider2D collision)
     {
 		if (collision.CompareTag("Trigger-Destroy"))
-        {
-			inTriggerArea = false;
-			dialogueTrigger = null;
-
-			dtc = null;
-
-			circleColActive = false;
-        }
-
-		if (collision.CompareTag("Trigger-Reset"))
         {
 			inTriggerArea = false;
 			dialogueTrigger = null;
@@ -254,6 +291,4 @@ public class Player : MonoBehaviour
 			return false;
         }
     }
-
-	
 }

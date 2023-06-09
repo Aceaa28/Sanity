@@ -26,12 +26,14 @@ public class UIController : MonoBehaviour
         if (isPaused)
         {
             Time.timeScale = 0f; // Set time scale to 0 to pause the game
-              gameScreen.SetActive(true); // Show the menu panel
+            gameScreen.SetActive(true); // Show the menu panel
+            MusicManager.Instance.PlayEffects("Paused");
         }
         else
         {
             Time.timeScale = 1f; // Set time scale back to 1 to resume the game
-              gameScreen.SetActive(false); // Hide the menu panel
+            gameScreen.SetActive(false); // Hide the menu panel
+            MusicManager.Instance.PlayEffects("NotPaused");
         }
 
 
@@ -49,14 +51,16 @@ public class UIController : MonoBehaviour
          // Hide the menu after a delay
         Invoke("HideMenu", 3f);
         //SceneManager.LoadScene("Tutorial");
-   }
+        MusicManager.Instance.PlayEffects("Confirm");
+    }
 
    public void GameRestart()
    {
         Debug.Log("Start Over");
         //SceneManager.LoadScene("Tutorial");
         Invoke("HideMenu", 3f);
-   }
+        MusicManager.Instance.PlayEffects("Confirm");
+    }
 
    public void GameQuit()
    {
@@ -66,6 +70,7 @@ public class UIController : MonoBehaviour
         #else
             Application.Quit();
         #endif
+        MusicManager.Instance.PlayEffects("Confirm");
    }
 	
     public void ShowScreen()
