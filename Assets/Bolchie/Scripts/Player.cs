@@ -59,8 +59,7 @@ public class Player : MonoBehaviour
 		rb = GetComponent<Rigidbody2D> ();
 		anim = GetComponentInChildren<Animator> ();
 		circleCol = GetComponent<CircleCollider2D>();
-		audioSource = GetComponent<AudioSource>();   
-
+		audioSource = GetComponent<AudioSource>();
 	}
 
 	void Update()
