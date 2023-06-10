@@ -177,7 +177,7 @@ public class Player : MonoBehaviour
 			audioSource.Stop();
         }
 	}
-
+    
 	//attacking and jumping//
 	private void HandleInput()
 	{
@@ -213,6 +213,11 @@ public class Player : MonoBehaviour
 			anim.SetBool ("Ground", false);
 			grounded = false;
 			rb.AddForce (Vector2.up * jumpForce, ForceMode2D.Impulse);
+		}
+
+		if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && grounded)
+        {
+			MusicManager.Instance.PlayEffects("Jump");
 		}
 	}
 		
