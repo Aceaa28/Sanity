@@ -51,7 +51,6 @@ public class Player : MonoBehaviour
 	//for footsteps
 	AudioSource audioSource;
 	bool isMoving = false;
-	bool isJumping;
 
 	void Start () 
 	{
@@ -171,28 +170,12 @@ public class Player : MonoBehaviour
 			if (!audioSource.isPlaying)
             {
 				audioSource.Play();
-            }
+			}
         }
 		else
         {
 			audioSource.Stop();
         }
-
-		/*jump audio
-		if (!grounded)
-        {
-			isMoving = false;
-			isJumping = true;
-        }
-		else
-        {
-			isMoving = true;
-			isJumping = false;
-        }
-		if (isJumping)
-		{
-			MusicManager.Instance.PlayEffects("Jump");
-		}*/
 	}
 
 	//attacking and jumping//
@@ -230,13 +213,7 @@ public class Player : MonoBehaviour
 			anim.SetBool ("Ground", false);
 			grounded = false;
 			rb.AddForce (Vector2.up * jumpForce, ForceMode2D.Impulse);
-			//MusicManager.Instance.PlayEffects("Jump");
 		}
-
-		/*if (!grounded)
-		{
-			MusicManager.Instance.PlayEffects("Jump"); ;
-		}*/
 	}
 		
 	private void Flip (float horizontal)

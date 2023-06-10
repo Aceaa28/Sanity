@@ -5,11 +5,25 @@ using UnityEngine.UI;
 
 public class VolumeSlider : MonoBehaviour
 {
-    [SerializeField] private Slider slider;
+    public Slider musicSlider, effectsSlider;
 
-    void Start()
+    public void ToggleMusic()
     {
-        MusicManager.Instance.ChangeMasterVolume(slider.value);
-        slider.onValueChanged.AddListener(val => MusicManager.Instance.ChangeMasterVolume(val));
+        MusicManager.Instance.ToggleMusic();
+    }
+
+    public void ToggleEffects()
+    {
+        MusicManager.Instance.ToggleEffects();
+    }
+
+    public void MusicVolume()
+    {
+        MusicManager.Instance.MusicVolume(musicSlider.value);
+    }
+
+    public void EffectsVolume()
+    {
+        MusicManager.Instance.EffectsVolume(effectsSlider.value);
     }
 }

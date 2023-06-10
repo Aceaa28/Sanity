@@ -55,11 +55,6 @@ public class MusicManager : MonoBehaviour
             effectsSource.PlayOneShot(s.clip);
         }
     }
-      
-    public void ChangeMasterVolume(float value)
-    {
-        AudioListener.volume = value;
-    }
 
     public void ToggleEffects()
     {
@@ -69,5 +64,15 @@ public class MusicManager : MonoBehaviour
     public void ToggleMusic()
     {
         musicSource.mute = !musicSource.mute;
+    }
+
+    public void MusicVolume(float volume)
+    {
+        musicSource.volume = volume;
+    }
+
+    public void EffectsVolume(float volume)
+    {
+        effectsSource.volume = volume;
     }
 }
