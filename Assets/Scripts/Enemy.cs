@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     public float moveRange = 19f;
     private Vector2 initialPosition;
     GameObject player;
-    public float health = 3;
+    public int health = 3;
     //public bool inRange;
  
     // Start is called before the first frame update
@@ -48,8 +48,7 @@ public class Enemy : MonoBehaviour
 
           if(playerHealth != null)
           {
-             playerHealth.TakeDamage(0.5f);
-             
+             playerHealth.TakeDamage(1);
           }
         }
     }

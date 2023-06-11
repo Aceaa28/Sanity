@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DangerZones : MonoBehaviour
-{
-   public float damageAmount = 0.5f; 
+{ 
    
    void OnCollisionEnter2D(Collision2D collision)
    { 
@@ -14,7 +13,7 @@ public class DangerZones : MonoBehaviour
          
          if (playerHealth != null)
         { 
-            playerHealth.TakeDamage(damageAmount);
+            playerHealth.TakeDamage(1);
         } 
     } 
 }

@@ -153,7 +153,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -213,6 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d64d08dae0a84f69ba300cafa54d9ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 4155658043551573847}
   groundCheck: {fileID: 4102917963842107293}
   attackPoint: {fileID: 4168519735550316095}
   attackRange: 3.04
@@ -225,7 +226,7 @@ MonoBehaviour:
   enemy:
   - {fileID: 0}
   - {fileID: 0}
-  jumpForce: 4
+  jumpForce: 1.5
 --- !u!1 &4168519735550316094
 GameObject:
   m_ObjectHideFlags: 0

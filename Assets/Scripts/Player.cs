@@ -47,12 +47,19 @@ public class Player : MonoBehaviour
     private Collider2D dialogueTrigger;
     private DialogueTriggerController dtc;
 
+	
+    // public Transform characterTransform;
+    // public float fallingThreshold = -10f;
+	// public UIController uiController;
+	// private bool isGameOver = false;
+
 	void Start () 
 	{
 		GetComponent<Rigidbody2D> ().freezeRotation = true;
 		rb = GetComponent<Rigidbody2D> ();
 		anim = GetComponentInChildren<Animator> ();
 		circleCol = GetComponent<CircleCollider2D>();
+		// uiController.EndGame();
 
 	}
 
@@ -65,6 +72,11 @@ public class Player : MonoBehaviour
             FixedUpdate();
             HandleInput();
         }
+
+		// if (!isGameOver && characterTransform.position.y < fallingThreshold)
+        // {
+        //     EndGame();
+        // }
 
 	if (inTriggerArea)
         {
@@ -164,6 +176,7 @@ public class Player : MonoBehaviour
 			}
 
 		}
+		
 		if (Input.GetKeyUp(KeyCode.LeftAlt))
 			{
 			attack = false;
