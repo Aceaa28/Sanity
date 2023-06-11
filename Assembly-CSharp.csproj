@@ -56,11 +56,13 @@
      <Compile Include="Assets\Bolchie\Scripts\Enemy.cs" />
      <Compile Include="Assets\Bolchie\Scripts\Platform.cs" />
      <Compile Include="Assets\Bolchie\Scripts\DialogueSystem\DialogueBaseClass.cs" />
+     <Compile Include="Assets\Bolchie\Scripts\Core\DialogueAudio.cs" />
      <Compile Include="Assets\Bolchie\Scripts\Menu.cs" />
      <Compile Include="Assets\Bolchie\Scripts\DialogueSystem\DialogueLine.cs" />
      <Compile Include="Assets\Bolchie\Scripts\PlatformCreator.cs" />
      <Compile Include="Assets\Bolchie\Scripts\Toggle.cs" />
      <Compile Include="Assets\Bolchie\Scripts\Core\SoundManager.cs" />
+     <Compile Include="Assets\Bolchie\Scripts\Core\AudioChangeColor.cs" />
      <Compile Include="Assets\Bolchie\Scripts\Portal.cs" />
      <Compile Include="Assets\Bolchie\Scripts\Core\MusicManager.cs" />
      <Compile Include="Assets\Bolchie\Scripts\DialogueSystem\DialogueHolder.cs" />

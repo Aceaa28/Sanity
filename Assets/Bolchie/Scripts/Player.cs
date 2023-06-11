@@ -63,14 +63,31 @@ public class Player : MonoBehaviour
 
 	void Update()
 	{
-		HandleInput ();
-
 		if (!inDialogue())
         {
             playerMovement();
             HandleInput();
 			anim.enabled = true;
-        }
+
+			//animation for bat//
+			if (Input.GetKeyDown(KeyCode.Z))
+			{
+				holdBat = anim.GetBool("HoldBat");
+				MusicManager.Instance.PlayEffects("Equip");
+
+				if (!holdBat)
+				{
+					anim.SetBool("HoldBat", true);
+					holdBat = true;
+				}
+
+				else if (holdBat)
+				{
+					anim.SetBool("HoldBat", false);
+					holdBat = false;
+				}
+			}
+		}
 
 	if (inTriggerArea)
         {
@@ -84,26 +101,7 @@ public class Player : MonoBehaviour
 			circleCol.isTrigger = true;
 			//circleColActive = true;
 		}
-
-		//animation for bat//
-		if (Input.GetKeyDown (KeyCode.Z)) 
-		{
-			holdBat = anim.GetBool("HoldBat");
-			MusicManager.Instance.PlayEffects("Equip");
-
-			if (!holdBat)
-			{
-				anim.SetBool("HoldBat", true);
-				holdBat = true;
-			}
-			
-			else if(holdBat)
-			{
-				anim.SetBool("HoldBat", false);
-				holdBat = false;
-			}
-		}
-
+		
 		if(holdBat && ((horizontal > 0) || (horizontal < 0) ))
 		{
 			
@@ -114,8 +112,6 @@ public class Player : MonoBehaviour
 		{
 			anim.SetFloat ("BatRun", 0);
 		}
-
-		
 	}
 
 	void OnDrawGizmosSelected()
