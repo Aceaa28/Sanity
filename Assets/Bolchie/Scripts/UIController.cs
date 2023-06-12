@@ -10,12 +10,21 @@ public class UIController : MonoBehaviour
    
     // Start is called before the first frame update
     
+    private void Start()
+    {
+        gameOverScreen.SetActive(false);
+    }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
             TogglePause();
+        }
+
+        if (characterTransform.position.y <= fallingTreshold)
+        {
+            EndGame();
         }
     }
 
