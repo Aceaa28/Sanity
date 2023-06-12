@@ -44,3 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameScreen: {fileID: 0}
+  player: {fileID: 0}
+  scene: Tutorial
+  gameOverScreen: {fileID: 0}
+  characterTransform: {fileID: 0}
+  fallingThreshold: -66
+  startButton: {fileID: 0}

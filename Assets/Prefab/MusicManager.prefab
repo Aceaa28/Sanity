@@ -264,6 +264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8666435987438888119}
   - component: {fileID: 8666435987438888120}
+  - component: {fileID: 1059641935}
   m_Layer: 0
   m_Name: MusicManager
   m_TagString: Untagged
@@ -323,3 +324,16 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 4e349dc959014a845b9aa317d1c2b7f0, type: 3}
   musicSource: {fileID: 8666435987207883154}
   effectsSource: {fileID: 8666435987000152806}
+--- !u!114 &1059641935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8666435987438888121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b087881add314240890440632587603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectsSlider: {fileID: 0}

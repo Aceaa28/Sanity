@@ -19,6 +19,9 @@ public class PlayerHealth : MonoBehaviour
     public Sprite halfHeart;
     public Sprite emptyHeart;
 
+    public GameObject gameOverScreen;
+    private bool isGameOver = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -68,10 +71,10 @@ public class PlayerHealth : MonoBehaviour
         {
 
         // Check if the player has been defeated
-       if (currentHealth <= 0)
-        {
-           Die();
-        }
+            if (currentHealth <= 0)
+                {
+                    Die();
+                }
         }
     }
 
@@ -87,6 +90,12 @@ public class PlayerHealth : MonoBehaviour
     {
         // Implement death behavior, such as resetting the level or game over logic.
             anim.SetBool("Dead", true);
-		    dead = true;    
+		    dead = true;   
+             isGameOver = true;
+
+        // Activate the game over screen
+        gameOverScreen.SetActive(true);
+
+        Debug.Log("EndGame called from Player"); 
     }
 }

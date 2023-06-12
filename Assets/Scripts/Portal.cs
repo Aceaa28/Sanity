@@ -12,6 +12,7 @@ public class Portal : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             SceneManager.LoadScene(scene); // Load the destination scene
+            MusicManager.Instance.PlayEffects("Portal");
         }
     }
 }

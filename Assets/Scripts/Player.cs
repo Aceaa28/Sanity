@@ -47,6 +47,9 @@ public class Player : MonoBehaviour
     private Collider2D dialogueTrigger;
     private DialogueTriggerController dtc;
 
+	//for footsteps
+	AudioSource audioSource;
+	bool isMoving = false;
 	
     // public Transform characterTransform;
     // public float fallingThreshold = -10f;
@@ -59,6 +62,7 @@ public class Player : MonoBehaviour
 		rb = GetComponent<Rigidbody2D> ();
 		anim = GetComponentInChildren<Animator> ();
 		circleCol = GetComponent<CircleCollider2D>();
+		audioSource = GetComponent<AudioSource>();
 		// uiController.EndGame();
 
 	}
@@ -69,8 +73,28 @@ public class Player : MonoBehaviour
 
 		if (!inDialogue())
         {
-            FixedUpdate();
+            playerMovement();
             HandleInput();
+			anim.enabled = true;
+
+			//animation for bat//
+			if (Input.GetKeyDown(KeyCode.Z))
+			{
+				holdBat = anim.GetBool("HoldBat");
+				MusicManager.Instance.PlayEffects("Equip");
+
+				if (!holdBat)
+				{
+					anim.SetBool("HoldBat", true);
+					holdBat = true;
+				}
+
+				else if (holdBat)
+				{
+					anim.SetBool("HoldBat", false);
+					holdBat = false;
+				}
+			}
         }
 
 		// if (!isGameOver && characterTransform.position.y < fallingThreshold)
@@ -81,6 +105,8 @@ public class Player : MonoBehaviour
 	if (inTriggerArea)
         {
             dialogueTrigger.gameObject.GetComponent<DialogueTriggerController>().ActivateDialogue();
+			anim.enabled = false;
+			audioSource.Stop();
         }
 
 		if (circleColActive == false)
@@ -90,22 +116,22 @@ public class Player : MonoBehaviour
 		}
 
 		//animation for bat//
-		if (Input.GetKeyDown (KeyCode.Z)) 
-		{
-			holdBat = anim.GetBool("HoldBat");
+		// if (Input.GetKeyDown (KeyCode.Z)) 
+		// {
+		// 	holdBat = anim.GetBool("HoldBat");
 
-			if(!holdBat)
-			{
-				anim.SetBool("HoldBat", true);
-				holdBat = true;
-			}
+		// 	if(!holdBat)
+		// 	{
+		// 		anim.SetBool("HoldBat", true);
+		// 		holdBat = true;
+		// 	}
 			
-			else if(holdBat)
-			{
-				anim.SetBool("HoldBat", false);
-				holdBat = false;
-			}
-		}
+		// 	else if(holdBat)
+		// 	{
+		// 		anim.SetBool("HoldBat", false);
+		// 		holdBat = false;
+		// 	}
+		// }
 
 		if(holdBat && ((horizontal > 0) || (horizontal < 0) ))
 		{
@@ -129,30 +155,77 @@ public class Player : MonoBehaviour
 		Gizmos.DrawWireSphere(attackPoint.position, attackRange);
 	}
 
-	//movement//
-	void FixedUpdate ()
-	{
-		grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
-		anim.SetBool ("Ground", grounded);
+	private void playerMovement()
+    {
+		grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+		anim.SetBool("Ground", grounded);
 
 		horizontal = Input.GetAxis("Horizontal");
 		vertical = Input.GetAxis("Vertical");
+
 		if (!dead && !attack)
 		{
-			anim.SetFloat ("vSpeed", rb.velocity.y);
-			anim.SetFloat ("Speed", Mathf.Abs (horizontal));
-			rb.velocity = new Vector2 (horizontal * speed, rb.velocity.y);
+			anim.SetFloat("vSpeed", rb.velocity.y);
+			anim.SetFloat("Speed", Mathf.Abs(horizontal));
+			rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
 		}
-		if (horizontal > 0 && !facingRight && !dead && !attack) 
+		if (horizontal > 0 && !facingRight && !dead && !attack)
 		{
-			Flip (horizontal);
+			Flip(horizontal);
 		}
 
 		else if (horizontal < 0 && facingRight && !dead && !attack)
 		{
-			Flip (horizontal);
+			Flip(horizontal);
 		}
+
+		//footsteps audio
+		if (rb.velocity.x != 0 && grounded)
+        {
+			isMoving = true;
+        }
+		else
+        {
+			isMoving = false;
+        }
+		if (isMoving)
+        {
+			if (!audioSource.isPlaying)
+            {
+				audioSource.Play();
+			}
+        }
+		else
+        {
+			audioSource.Stop();
+        }
 	}
+
+
+	//movement//
+	// void FixedUpdate ()
+	// {
+	// 	grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
+	// 	anim.SetBool ("Ground", grounded);
+
+	// 	horizontal = Input.GetAxis("Horizontal");
+	// 	vertical = Input.GetAxis("Vertical");
+	// 	if (!dead && !attack)
+	// 	{
+	// 		anim.SetFloat ("vSpeed", rb.velocity.y);
+	// 		anim.SetFloat ("Speed", Mathf.Abs (horizontal));
+	// 		rb.velocity = new Vector2 (horizontal * speed, rb.velocity.y);
+	// 	}
+	// 	if (horizontal > 0 && !facingRight && !dead && !attack) 
+	// 	{
+	// 		Flip (horizontal);
+	// 	}
+
+	// 	else if (horizontal < 0 && facingRight && !dead && !attack)
+	// 	{
+	// 		Flip (horizontal);
+	// 	}
+	// }
 
 	//attacking and jumping//
 	private void HandleInput()
@@ -162,6 +235,7 @@ public class Player : MonoBehaviour
 			attack = true;
 			anim.SetBool ("Attack", true);
 			anim.SetFloat ("Speed", 0);
+			MusicManager.Instance.PlayEffects("Swing");
 
 			//Detect enemies in range of attack
 			Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
@@ -173,6 +247,7 @@ public class Player : MonoBehaviour
 				Debug.Log(enemyScript.health);
 				enemyScript.health -= 1;
 				Debug.Log("we hit " + enemy.name);
+				MusicManager.Instance.PlayEffects("Attack");
 			}
 
 		}
@@ -188,6 +263,12 @@ public class Player : MonoBehaviour
 			anim.SetBool ("Ground", false);
 			grounded = false;
 			rb.AddForce (Vector2.up * jumpForce, ForceMode2D.Impulse);
+		}
+
+		
+		if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && grounded)
+        {
+			MusicManager.Instance.PlayEffects("Jump");
 		}
 	}
 		
@@ -218,14 +299,6 @@ public class Player : MonoBehaviour
 
 			dtc = collision.gameObject.GetComponent<DialogueTriggerController>();
         }
-
-		if (collision.CompareTag("Trigger-Reset"))
-        {
-			inTriggerArea = true;
-			dialogueTrigger = collision;
-
-			dtc = collision.gameObject.GetComponent<DialogueTriggerController>();
-        }
     }
 
 	private void OnTriggerExit2D(Collider2D collision)
@@ -240,16 +313,6 @@ public class Player : MonoBehaviour
 			circleColActive = false;
 
 			//Destroy(collision.gameObject);
-        }
-
-		if (collision.CompareTag("Trigger-Reset"))
-        {
-			inTriggerArea = false;
-			dialogueTrigger = null;
-
-			dtc = null;
-
-			circleColActive = false;
         }
     }
 

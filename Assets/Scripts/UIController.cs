@@ -46,6 +46,7 @@ public class UIController : MonoBehaviour
         {
             Time.timeScale = 0f; // Set time scale to 0 to pause the game
             Invoke("ShowScreen", 0f);
+            MusicManager.Instance.PlayEffects("Paused");
         }
         else
         {
@@ -53,6 +54,7 @@ public class UIController : MonoBehaviour
             //gameScreen.SetActive(false); // Hide the menu panel
             Invoke("HideMenu", 1f);
             Debug.Log("Done");
+            MusicManager.Instance.PlayEffects("NotPaused");
         }       
     }
 
@@ -66,6 +68,7 @@ public class UIController : MonoBehaviour
    public void GameStart()
    {
         Debug.Log("Start");
+        MusicManager.Instance.PlayEffects("Confirm");
 
         // Disable the start button
         // startButton.interactable = false;
@@ -91,6 +94,7 @@ private IEnumerator HideMenuWithDelay(float delay)
    public void GameRestart()
    {
         Debug.Log("Start Over");
+        MusicManager.Instance.PlayEffects("Confirm");
         SceneManager.LoadScene(scene);
         //Invoke("HideMenu", 1f);
 
@@ -105,6 +109,7 @@ private IEnumerator HideMenuWithDelay(float delay)
    public void GameQuit()
    {
         Debug.Log("Game Quit");
+        MusicManager.Instance.PlayEffects("Confirm");
          #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
         #else
